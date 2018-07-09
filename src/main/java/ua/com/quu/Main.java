@@ -1,9 +1,8 @@
 package java.ua.com.quu;
 
-import java.ua.com.quu.utils.ResourceLoader;
-
 public class Main {
 	public static void main(String[] args) {
-		ResourceLoader reader = new ResourceLoader("");
+		String resourceFile = "out/resourceFile.txt";
+		DataContainer dataContainer = new DataContainer(resourceFile);
 	}
 }

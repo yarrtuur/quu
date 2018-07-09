@@ -1,46 +1,34 @@
 package java.ua.com.quu.utils;
 
-import java.util.Iterator;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ResourceLoader implements ResourceLoaderImpl {
-	private String resourceFile;
 	private List<UnitCoupleImpl> unitCoupleList;
-	private UnitCoupleImpl resourceStorage;
+	private String resourceFile;
+	private List<UnitCoupleImpl> waitingUnitList;
+	private List<UnitCoupleImpl> queryUnitList;
+
 
 	public ResourceLoader(String resourceFile) {
 		this.resourceFile = resourceFile;
-		fileDataSeparate(resourceFile);
-		initUnitCouple();
-	}
-
-	@Override
-	public List<UnitCoupleImpl> getQueryUnitList() {
-		Iterator<UnitCoupleImpl> step = unitCoupleList.iterator();
-		while (step.hasNext()) {
-			resourceStorage = step.next();
-			if (resourceStorage.canProcess("C")) {
-				return resourceStorage.getData();
-			}
+		try {
+			fileDataSeparate(resourceFile);
+			initUnitCouple();
+		} catch (ExitException e) {
+			System.out.println(e.getMessage());
 		}
-		return null;//todo
 	}
 
-	@Override
-	public List<UnitCoupleImpl> getWaitingUnitList() {
-		Iterator<UnitCoupleImpl> step = unitCoupleList.iterator();
-		while (step.hasNext()) {
-			resourceStorage = step.next();
-			if (resourceStorage.canProcess("D")) {
-				return resourceStorage.getData();
-			}
+	private void fileDataSeparate(String resourceFile) throws ExitException {
+		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+		try (InputStream in = classloader.getResourceAsStream(resourceFile)) {
+			//todo read from file
+		} catch (IOException | NullPointerException e) {
+			throw new ExitException("No resource file found in " + e.getMessage());
 		}
-		return null;//todo
-	}
-
-	private void fileDataSeparate(String resourceFile) {
-
 	}
 
 	private void initUnitCouple() {
