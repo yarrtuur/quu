@@ -3,9 +3,9 @@ package ua.com.quu.data_source;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 
 public class WaitingUnit implements UnitTypesImpl{
-	//D service_id[.variation_id] question_type_id[.category_id.[sub-category_id]] P/N date_from[-date_to]
 	private int serviceId;
 	private int serviceVariationId;
 	private int questionTypeId;
@@ -19,7 +19,8 @@ public class WaitingUnit implements UnitTypesImpl{
 		setDataFields(stringData);
 	}
 
-    private void setDataFields(String stringData) throws ParseException {
+	@Override
+    public void setDataFields(String stringData) throws ParseException {
 	    String[] line = stringData.split("\\s");
 	    serviceDivide(line[1]);
 	    questionDivide(line[2]);
@@ -40,12 +41,43 @@ public class WaitingUnit implements UnitTypesImpl{
     }
 
     private void questionDivide(String s) {
-
+		String[] line = s.split(".");
+		questionTypeId = Integer.parseInt(line[0]);
+		if(line.length > 1) questionCategoryId = Integer.parseInt(line[1]);
+		if(line.length > 2) questionSubCategoryId = Integer.parseInt(line[2]);
     }
 
     private void serviceDivide(String s) {
+		String[] line = s.split(".");
+		serviceId = Integer.parseInt(line[0]);
+		if(line.length > 1) serviceVariationId = Integer.parseInt(line[1]);
+	}
 
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		WaitingUnit that = (WaitingUnit) o;
+		return serviceId == that.serviceId &&
+				serviceVariationId == that.serviceVariationId &&
+				questionTypeId == that.questionTypeId &&
+				questionCategoryId == that.questionCategoryId &&
+				questionSubCategoryId == that.questionSubCategoryId &&
+				responseType == that.responseType &&
+				Objects.equals(sdfFrom, that.sdfFrom) &&
+				Objects.equals(sdfTo, that.sdfTo);
+	}
 
+	@Override
+	public int hashCode() {
+
+		return Objects.hash(serviceId, serviceVariationId, questionTypeId, questionCategoryId, questionSubCategoryId, responseType, sdfFrom, sdfTo);
+	}
+
+	public String toString(){
+		return String.format("serviceId:%d, serviceVariationId:%d, questionTypeId:%d, questionCategoryId:%d, " +
+						"questionSubCategoryId:%d,responseType:%s,sdfFrom:%s,sdfTo:%S",
+				serviceId,serviceVariationId,questionTypeId,questionCategoryId,questionSubCategoryId,responseType,sdfFrom,sdfTo);
+	}
 
 }
