@@ -2,7 +2,11 @@ package ua.com.quu.utils;
 
 import ua.com.quu.data_source.UnitTypesImpl;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -12,8 +16,8 @@ public class ResourceLoader implements ResourceLoaderImpl {
     private List<UnitCoupleContainerImpl> unitCoupleList;
 
     public ResourceLoader(String resourceFile) {
-        try {
             initUnitCouple();
+        try {
             fileDataSeparate(resourceFile);
         } catch (ExitException e) {
             System.out.println(e.getMessage());
@@ -47,25 +51,26 @@ public class ResourceLoader implements ResourceLoaderImpl {
     public void fileDataSeparate(String resourceFile) throws ExitException {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         try (InputStream in = classloader.getResourceAsStream(resourceFile);
-             BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+             BufferedReader reader = new BufferedReader(new InputStreamReader(in))
         ) {
-            //todo read from file
             int rowsCount = Integer.parseInt(reader.readLine());
-            while(reader.ready()){
+            while (reader.ready()) {
                 putRightContainer(reader.readLine());
             }
-
-        } catch (IOException | NullPointerException e) {
-            throw new ExitException("No resource file found in " + e.getMessage());
+        } catch (IOException | NullPointerException | ExitException e) {
+            System.err.println(e.getMessage());
         }
     }
 
-    private void putRightContainer(String stringFromFile) {
-        Iterator<UnitCoupleContainerImpl> step = unitCoupleList.iterator();
-        while (step.hasNext()) {
-            UnitCoupleContainerImpl gaither = step.next();
+    private void putRightContainer(String stringFromFile) throws ExitException {
+        System.out.println(stringFromFile);
+        for (UnitCoupleContainerImpl gaither : unitCoupleList) {
             if (gaither.canProcess(stringFromFile)) {
-                gaither.setData(stringFromFile);
+                try {
+                    gaither.setData(stringFromFile);
+                } catch (Exception e) {
+                    throw new ExitException(e.getMessage());
+                }
             }
         }
     }

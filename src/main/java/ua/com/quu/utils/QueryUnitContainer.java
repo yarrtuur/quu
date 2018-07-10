@@ -7,24 +7,30 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class QueryUnitContainer implements UnitCoupleContainerImpl {
-	private List<UnitTypesImpl> queryUnitList;
+    private List<UnitTypesImpl> queryUnitList;
 
-	public QueryUnitContainer() {
-		queryUnitList = new LinkedList<>();
-	}
+    public QueryUnitContainer() {
+        queryUnitList = new LinkedList<>();
+    }
 
-	@Override
-	public List<UnitTypesImpl> getData() {
-		return queryUnitList;
-	}
+    @Override
+    public List<UnitTypesImpl> getData() {
+        return queryUnitList;
+    }
 
-	@Override
-	public void setData(String stringFromFile) {
-		queryUnitList.add(new QueryUnit(stringFromFile));
-	}
+    @Override
+    public void setData(String stringFromFile) throws ExitException {
+        try {
+            queryUnitList.add(new QueryUnit(stringFromFile));
+        }catch (Exception e){
+            throw new ExitException(e.getMessage());
+        }
+            System.out.println("new QueryUnit added");
 
-	@Override
-	public boolean canProcess(String startWith) {
-		return startWith.equals("D");
-	}
+    }
+
+    @Override
+    public boolean canProcess(String lineToPrepare) {
+        return lineToPrepare.startsWith("D");
+    }
 }
