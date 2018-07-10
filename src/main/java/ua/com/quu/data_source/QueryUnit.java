@@ -1,8 +1,8 @@
-package java.ua.com.quu.data_source;
+package ua.com.quu.data_source;
 
 import java.text.SimpleDateFormat;
 
-public class QueryUnit {
+public class QueryUnit implements UnitTypesImpl{
 	//C service_id[.variation_id] question_type_id[.category_id.[sub-category_id]] P/N date time
 	private int serviceId;
 	private int serviceVariationId;
@@ -12,5 +12,10 @@ public class QueryUnit {
 	private ResponseType responseType;
 	private SimpleDateFormat sdf;
 	private int waitingTime;
+	private String stringData;
+
+	public QueryUnit(String stringData) {
+		this.stringData = stringData;
+	}
 
 }

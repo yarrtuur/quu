@@ -1,4 +1,4 @@
-package java.ua.com.quu.utils;
+package ua.com.quu.utils;
 
 public class ExitException extends Exception {
 

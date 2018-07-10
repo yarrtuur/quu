@@ -1,13 +1,15 @@
-package java.ua.com.quu.utils;
+package ua.com.quu.utils;
+
+import ua.com.quu.data_source.UnitTypesImpl;
 
 import java.util.Collections;
 import java.util.List;
 
-public class Unreachable implements UnitCoupleImpl {
-	// todo private List<UnitCoupleImpl> unreachableUnitList;
+public class Unreachable implements UnitCoupleContainerImpl {
+	// todo private List<UnitCoupleContainerImpl> unreachableUnitList;
 
 	@Override
-	public List<UnitCoupleImpl> getData() {
+	public List<UnitTypesImpl> getData() {
 		return Collections.emptyList();
 	}
 
