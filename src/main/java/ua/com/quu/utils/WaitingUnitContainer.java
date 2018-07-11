@@ -3,7 +3,6 @@ package ua.com.quu.utils;
 import ua.com.quu.data_source.UnitTypesImpl;
 import ua.com.quu.data_source.WaitingUnit;
 
-import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 

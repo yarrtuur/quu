@@ -8,6 +8,7 @@ public class Main {
         String resourceFile = args[0];
         ResourceLoader resourceLoader = new ResourceLoader(resourceFile);
         DataContainer dataContainer = new DataContainer(resourceLoader);
-        System.out.println(dataContainer.getQueryUnitList().toString());
+//        System.out.println(dataContainer.getQueryUnitList().toString());
+//        System.out.println(dataContainer.getWaitingUnitList().toString());
     }
 }

@@ -8,45 +8,45 @@ import java.util.Date;
 import java.util.Objects;
 
 public class WaitingUnit implements UnitTypesImpl {
-    private int serviceId;
-    private int serviceVariationId;
-    private int questionTypeId;
-    private int questionCategoryId;
-    private int questionSubCategoryId;
+    private String serviceId;
+    private String serviceVariationId;
+    private String questionTypeId;
+    private String questionCategoryId;
+    private String questionSubCategoryId;
     private ResponseType responseType;
-    private Date sdfFrom;
-    private Date sdfTo;
+    private Date sdf;
+    private int waitingTime;
 
     public WaitingUnit(String stringData) throws ExitException {
         try {
             setDataFields(stringData);
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw new ExitException(ex.getMessage());
         }
     }
 
     @Override
     public void setDataFields(String stringData) throws ExitException {
-       try {
-           String[] line = stringData.split(" ");
-           serviceDivide(line[1]);
-           questionDivide(line[2]);
-           responseTypeDivide(line[3]);
-           datesDivide(line[4]);
-           System.out.println(toString());
-       }catch(Exception ex ){
-           throw new ExitException(ex.getMessage());
-       }
+        try {
+            String[] line = stringData.split(" ");
+            serviceDivide(line[1]);
+            questionDivide(line[2]);
+            responseTypeDivide(line[3]);
+            setDate(line[4]);
+            setTimeWait(line[5]);
+        } catch (Exception ex) {
+            throw new ExitException(ex.getMessage());
+        }
     }
 
-    private void datesDivide(String s)  throws ExitException {
+    private void setTimeWait(String s) {
+        waitingTime = Integer.parseInt(s);
+    }
+
+    private void setDate(String s) throws ExitException {
         try {
-            String[] line = s.split("-");
-            sdfFrom = new SimpleDateFormat("dd MMM yyyy").parse(line[0]);
-            if (line.length > 1) {
-                sdfTo = new SimpleDateFormat("dd MMM yyyy").parse(line[1]);
-            }
-        }catch(ParseException ex){
+            sdf = new SimpleDateFormat("dd.MM.yyyy").parse(s);
+        } catch (ParseException ex) {
             throw new ExitException(ex.getMessage());
         }
     }
@@ -54,28 +54,32 @@ public class WaitingUnit implements UnitTypesImpl {
     private void responseTypeDivide(String s) throws ExitException {
         try {
             responseType = (s.equals(ResponseType.P)) ? ResponseType.P : ResponseType.N;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw new ExitException(ex.getMessage());
         }
     }
 
     private void questionDivide(String s) throws ExitException {
         try {
-            String[] line = s.split(".");
-            questionTypeId = Integer.parseInt(line[0]);
-            if (line.length > 1) questionCategoryId = Integer.parseInt(line[1]);
-            if (line.length > 2) questionSubCategoryId = Integer.parseInt(line[2]);
-        }catch(Exception ex){
+            String[] line = s.split("\\.");
+            questionTypeId = line[0];
+            if (line.length > 1) questionCategoryId = line[1];
+            if (line.length > 2) questionSubCategoryId = line[2];
+        } catch (IndexOutOfBoundsException ex) {
             throw new ExitException(ex.getMessage());
         }
     }
 
     private void serviceDivide(String s) throws ExitException {
-        String[] line = s.split(".");
         try {
-            serviceId = Integer.parseInt(line[0]);
-            if (line.length > 1) serviceVariationId = Integer.parseInt(line[1]);
-        }catch (ArrayIndexOutOfBoundsException ex){
+            if (s.indexOf(".") == 1) {
+                String[] line = s.split("\\.");
+                serviceId = line[0];
+                serviceVariationId = line[1];
+            } else {
+                serviceId = s;
+            }
+        } catch (IndexOutOfBoundsException ex) {
             throw new ExitException(ex.getMessage());
         }
     }
@@ -90,21 +94,22 @@ public class WaitingUnit implements UnitTypesImpl {
                 questionTypeId == that.questionTypeId &&
                 questionCategoryId == that.questionCategoryId &&
                 questionSubCategoryId == that.questionSubCategoryId &&
+                waitingTime == that.waitingTime &&
                 responseType == that.responseType &&
-                Objects.equals(sdfFrom, that.sdfFrom) &&
-                Objects.equals(sdfTo, that.sdfTo);
+                Objects.equals(sdf, that.sdf);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(serviceId, serviceVariationId, questionTypeId, questionCategoryId, questionSubCategoryId, responseType, sdfFrom, sdfTo);
+        return Objects.hash(serviceId, serviceVariationId, questionTypeId, questionCategoryId, questionSubCategoryId, responseType, sdf, waitingTime);
     }
 
     public String toString() {
-        return String.format("serviceId:%d, serviceVariationId:%d, questionTypeId:%d, questionCategoryId:%d, " +
-                        "questionSubCategoryId:%d,responseType:%s,sdfFrom:%s,sdfTo:%S",
-                serviceId, serviceVariationId, questionTypeId, questionCategoryId, questionSubCategoryId, responseType, sdfFrom, sdfTo);
+        return String.format("serviceId:%s, serviceVariationId:%s, questionTypeId:%s, questionCategoryId:%s, " +
+                        "questionSubCategoryId:%s,responseType:%s,sdf:%s",
+                serviceId, serviceVariationId, questionTypeId, questionCategoryId, questionSubCategoryId, responseType, sdf);
     }
+
 
 }

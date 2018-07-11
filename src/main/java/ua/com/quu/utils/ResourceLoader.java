@@ -19,7 +19,7 @@ public class ResourceLoader implements ResourceLoaderImpl {
             initUnitCouple();
         try {
             fileDataSeparate(resourceFile);
-        } catch (ExitException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
