@@ -6,14 +6,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.text.ParseException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public class ResourceLoader implements ResourceLoaderImpl {
-    private List<UnitCoupleContainerImpl> unitCoupleList;
+    private List<UnitContainerImpl> unitCoupleList;
 
     public ResourceLoader(String resourceFile) {
             initUnitCouple();
@@ -25,10 +24,8 @@ public class ResourceLoader implements ResourceLoaderImpl {
     }
 
     @Override
-    public List<UnitTypesImpl> fillFulWaitingUnitList() {
-        Iterator<UnitCoupleContainerImpl> step = unitCoupleList.iterator();
-        while (step.hasNext()) {
-            UnitCoupleContainerImpl gaither = step.next();
+    public List<UnitTypesImpl> filFullWaitingUnitList() {
+        for (UnitContainerImpl gaither : unitCoupleList) {
             if (gaither.canProcess("C")) {
                 return gaither.getData();
             }
@@ -37,10 +34,8 @@ public class ResourceLoader implements ResourceLoaderImpl {
     }
 
     @Override
-    public List<UnitTypesImpl> fillFulQueryUnitList() {
-        Iterator<UnitCoupleContainerImpl> step = unitCoupleList.iterator();
-        while (step.hasNext()) {
-            UnitCoupleContainerImpl gaither = step.next();
+    public List<UnitTypesImpl> filFullQueryUnitList() {
+        for (UnitContainerImpl gaither : unitCoupleList) {
             if (gaither.canProcess("D")) {
                 return gaither.getData();
             }
@@ -48,7 +43,7 @@ public class ResourceLoader implements ResourceLoaderImpl {
         return Collections.emptyList();
     }
 
-    public void fileDataSeparate(String resourceFile) throws ExitException {
+    public void fileDataSeparate(String resourceFile) {
         ClassLoader classloader = Thread.currentThread().getContextClassLoader();
         try (InputStream in = classloader.getResourceAsStream(resourceFile);
              BufferedReader reader = new BufferedReader(new InputStreamReader(in))
@@ -64,7 +59,7 @@ public class ResourceLoader implements ResourceLoaderImpl {
 
     private void putRightContainer(String stringFromFile) throws ExitException {
         System.out.println(stringFromFile);
-        for (UnitCoupleContainerImpl gaither : unitCoupleList) {
+        for (UnitContainerImpl gaither : unitCoupleList) {
             if (gaither.canProcess(stringFromFile)) {
                 try {
                     gaither.setData(stringFromFile);
@@ -79,7 +74,6 @@ public class ResourceLoader implements ResourceLoaderImpl {
         unitCoupleList = new LinkedList<>();
         unitCoupleList.add(new QueryUnitContainer());
         unitCoupleList.add(new WaitingUnitContainer());
-        unitCoupleList.add(new Unreachable());
     }
 
 }

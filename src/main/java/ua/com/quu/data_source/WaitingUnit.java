@@ -89,12 +89,12 @@ public class WaitingUnit implements UnitTypesImpl {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WaitingUnit that = (WaitingUnit) o;
-        return serviceId == that.serviceId &&
-                serviceVariationId == that.serviceVariationId &&
-                questionTypeId == that.questionTypeId &&
-                questionCategoryId == that.questionCategoryId &&
-                questionSubCategoryId == that.questionSubCategoryId &&
-                waitingTime == that.waitingTime &&
+        return waitingTime == that.waitingTime &&
+                Objects.equals(serviceId, that.serviceId) &&
+                Objects.equals(serviceVariationId, that.serviceVariationId) &&
+                Objects.equals(questionTypeId, that.questionTypeId) &&
+                Objects.equals(questionCategoryId, that.questionCategoryId) &&
+                Objects.equals(questionSubCategoryId, that.questionSubCategoryId) &&
                 responseType == that.responseType &&
                 Objects.equals(sdf, that.sdf);
     }

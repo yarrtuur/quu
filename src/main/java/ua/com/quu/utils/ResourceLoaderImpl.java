@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface ResourceLoaderImpl {
 
-    List<UnitTypesImpl> fillFulWaitingUnitList();
+    List<UnitTypesImpl> filFullWaitingUnitList();
 
-    List<UnitTypesImpl> fillFulQueryUnitList();
+    List<UnitTypesImpl> filFullQueryUnitList();
 
-    void fileDataSeparate(String resourceFile) throws ExitException;
+    void fileDataSeparate(String resourceFile);
 
 }

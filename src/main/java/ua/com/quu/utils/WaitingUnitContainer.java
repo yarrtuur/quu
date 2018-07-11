@@ -6,7 +6,7 @@ import ua.com.quu.data_source.WaitingUnit;
 import java.util.LinkedList;
 import java.util.List;
 
-public class WaitingUnitContainer implements UnitCoupleContainerImpl {
+public class WaitingUnitContainer implements UnitContainerImpl {
     private List<UnitTypesImpl> waitingUnitList;
 
     public WaitingUnitContainer() {

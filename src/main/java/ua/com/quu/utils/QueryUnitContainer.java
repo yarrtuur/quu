@@ -6,7 +6,7 @@ import ua.com.quu.data_source.UnitTypesImpl;
 import java.util.LinkedList;
 import java.util.List;
 
-public class QueryUnitContainer implements UnitCoupleContainerImpl {
+public class QueryUnitContainer implements UnitContainerImpl {
     private List<UnitTypesImpl> queryUnitList;
 
     public QueryUnitContainer() {

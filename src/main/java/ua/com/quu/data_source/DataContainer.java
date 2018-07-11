@@ -9,8 +9,8 @@ public class DataContainer {
     private List<UnitTypesImpl> queryUnitList;
 
     public DataContainer(ResourceLoader resourceLoader) {
-        waitingUnitList = resourceLoader.fillFulWaitingUnitList();
-        queryUnitList = resourceLoader.fillFulQueryUnitList();
+        waitingUnitList = resourceLoader.filFullWaitingUnitList();
+        queryUnitList = resourceLoader.filFullQueryUnitList();
     }
 
     public List<UnitTypesImpl> getQueryUnitList() {

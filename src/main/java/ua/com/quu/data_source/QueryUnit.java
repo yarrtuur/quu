@@ -53,6 +53,7 @@ public class QueryUnit implements UnitTypesImpl {
     }
 
     private void responseTypeDivide(String s) {
+        //noinspection EqualsBetweenInconvertibleTypes,EqualsBetweenInconvertibleTypes
         responseType = (s.equals(ResponseType.P)) ? ResponseType.P : ResponseType.N;
     }
 
@@ -90,11 +91,11 @@ public class QueryUnit implements UnitTypesImpl {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         QueryUnit queryUnit = (QueryUnit) o;
-        return serviceId == queryUnit.serviceId &&
-                serviceVariationId == queryUnit.serviceVariationId &&
-                questionTypeId == queryUnit.questionTypeId &&
-                questionCategoryId == queryUnit.questionCategoryId &&
-                questionSubCategoryId == queryUnit.questionSubCategoryId &&
+        return Objects.equals(serviceId, queryUnit.serviceId) &&
+                Objects.equals(serviceVariationId, queryUnit.serviceVariationId) &&
+                Objects.equals(questionTypeId, queryUnit.questionTypeId) &&
+                Objects.equals(questionCategoryId, queryUnit.questionCategoryId) &&
+                Objects.equals(questionSubCategoryId, queryUnit.questionSubCategoryId) &&
                 responseType == queryUnit.responseType &&
                 Objects.equals(sdfFrom, queryUnit.sdfFrom) &&
                 Objects.equals(sdfTo, queryUnit.sdfTo);
