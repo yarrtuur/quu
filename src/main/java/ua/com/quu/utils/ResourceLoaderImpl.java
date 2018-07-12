@@ -1,14 +1,14 @@
 package ua.com.quu.utils;
 
-import ua.com.quu.data_source.UnitTypesImpl;
+import ua.com.quu.data_source.UnitTypes;
 
 import java.util.List;
 
 public interface ResourceLoaderImpl {
 
-    List<UnitTypesImpl> filFullWaitingUnitList();
+    List<UnitTypes> filFullWaitingUnitList();
 
-    List<UnitTypesImpl> filFullQueryUnitList();
+    List<UnitTypes> filFullQueryUnitList();
 
     void fileDataSeparate(String resourceFile);
 

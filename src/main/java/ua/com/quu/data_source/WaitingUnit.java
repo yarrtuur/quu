@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 
-public class WaitingUnit implements UnitTypesImpl {
+public class WaitingUnit implements UnitTypes {
     private String serviceId;
     private String serviceVariationId;
     private String questionTypeId;
@@ -23,6 +23,38 @@ public class WaitingUnit implements UnitTypesImpl {
         } catch (Exception ex) {
             throw new ExitException(ex.getMessage());
         }
+    }
+
+    public String getServiceId() {
+        return serviceId;
+    }
+
+    public String getServiceVariationId() {
+        return serviceVariationId;
+    }
+
+    public String getQuestionTypeId() {
+        return questionTypeId;
+    }
+
+    public String getQuestionCategoryId() {
+        return questionCategoryId;
+    }
+
+    public String getQuestionSubCategoryId() {
+        return questionSubCategoryId;
+    }
+
+    public ResponseType getResponseType() {
+        return responseType;
+    }
+
+    public Date getSdf() {
+        return sdf;
+    }
+
+    public int getWaitingTime() {
+        return waitingTime;
     }
 
     @Override

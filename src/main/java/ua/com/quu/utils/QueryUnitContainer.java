@@ -1,20 +1,20 @@
 package ua.com.quu.utils;
 
 import ua.com.quu.data_source.QueryUnit;
-import ua.com.quu.data_source.UnitTypesImpl;
+import ua.com.quu.data_source.UnitTypes;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class QueryUnitContainer implements UnitContainerImpl {
-    private List<UnitTypesImpl> queryUnitList;
+    private List<UnitTypes> queryUnitList;
 
     public QueryUnitContainer() {
         queryUnitList = new LinkedList<>();
     }
 
     @Override
-    public List<UnitTypesImpl> getData() {
+    public List<UnitTypes> getData() {
         return queryUnitList;
     }
 

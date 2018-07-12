@@ -1,20 +1,20 @@
 package ua.com.quu.utils;
 
-import ua.com.quu.data_source.UnitTypesImpl;
+import ua.com.quu.data_source.UnitTypes;
 import ua.com.quu.data_source.WaitingUnit;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class WaitingUnitContainer implements UnitContainerImpl {
-    private List<UnitTypesImpl> waitingUnitList;
+    private List<UnitTypes> waitingUnitList;
 
     public WaitingUnitContainer() {
         this.waitingUnitList = new LinkedList<>();
     }
 
     @Override
-    public List<UnitTypesImpl> getData() {
+    public List<UnitTypes> getData() {
         return waitingUnitList;
     }
 

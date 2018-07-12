@@ -5,19 +5,19 @@ import ua.com.quu.utils.ResourceLoader;
 import java.util.List;
 
 public class DataContainer {
-    private List<UnitTypesImpl> waitingUnitList;
-    private List<UnitTypesImpl> queryUnitList;
+    private List<UnitTypes> waitingUnitList;
+    private List<UnitTypes> queryUnitList;
 
     public DataContainer(ResourceLoader resourceLoader) {
         waitingUnitList = resourceLoader.filFullWaitingUnitList();
         queryUnitList = resourceLoader.filFullQueryUnitList();
     }
 
-    public List<UnitTypesImpl> getQueryUnitList() {
+    public List<UnitTypes> getQueryUnitList() {
         return queryUnitList;
     }
 
-    public List<UnitTypesImpl> getWaitingUnitList() {
+    public List<UnitTypes> getWaitingUnitList() {
         return waitingUnitList;
     }
 }

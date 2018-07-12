@@ -1,13 +1,12 @@
 package ua.com.quu.utils;
 
-import ua.com.quu.data_source.UnitTypesImpl;
+import ua.com.quu.data_source.UnitTypes;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class ResourceLoader implements ResourceLoaderImpl {
     }
 
     @Override
-    public List<UnitTypesImpl> filFullWaitingUnitList() {
+    public List<UnitTypes> filFullWaitingUnitList() {
         for (UnitContainerImpl gaither : unitCoupleList) {
             if (gaither.canProcess("C")) {
                 return gaither.getData();
@@ -34,7 +33,7 @@ public class ResourceLoader implements ResourceLoaderImpl {
     }
 
     @Override
-    public List<UnitTypesImpl> filFullQueryUnitList() {
+    public List<UnitTypes> filFullQueryUnitList() {
         for (UnitContainerImpl gaither : unitCoupleList) {
             if (gaither.canProcess("D")) {
                 return gaither.getData();
