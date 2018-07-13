@@ -14,7 +14,7 @@ public class ResourceLoader implements ResourceLoaderImpl {
     private List<UnitContainerImpl> unitCoupleList;
 
     public ResourceLoader(String resourceFile) {
-            initUnitCouple();
+        initUnitCouple();
         try {
             fileDataSeparate(resourceFile);
         } catch (Exception e) {
@@ -57,7 +57,6 @@ public class ResourceLoader implements ResourceLoaderImpl {
     }
 
     private void putRightContainer(String stringFromFile) throws ExitException {
-        System.out.println(stringFromFile);
         for (UnitContainerImpl gaither : unitCoupleList) {
             if (gaither.canProcess(stringFromFile)) {
                 try {

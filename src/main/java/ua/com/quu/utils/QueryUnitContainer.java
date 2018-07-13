@@ -22,11 +22,9 @@ public class QueryUnitContainer implements UnitContainerImpl {
     public void setData(String stringFromFile) throws ExitException {
         try {
             queryUnitList.add(new QueryUnit(stringFromFile));
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new ExitException(e.getMessage());
         }
-            System.out.println("new QueryUnit added");
-
     }
 
     @Override

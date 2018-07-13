@@ -22,10 +22,9 @@ public class WaitingUnitContainer implements UnitContainerImpl {
     public void setData(String stringFromFile) throws ExitException {
         try {
             waitingUnitList.add(new WaitingUnit(stringFromFile));
-        }catch(Exception e){
+        } catch (Exception e) {
             throw new ExitException(e.getMessage());
         }
-        System.out.println("new WaitingUnit added");
     }
 
     @Override

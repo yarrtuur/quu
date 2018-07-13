@@ -85,7 +85,7 @@ public class WaitingUnit implements UnitTypes {
 
     private void responseTypeDivide(String s) throws ExitException {
         try {
-            responseType = (s.equals(ResponseType.P)) ? ResponseType.P : ResponseType.N;
+            responseType = (s.equals(ResponseType.P.toString())) ? ResponseType.P : ResponseType.N;
         } catch (Exception ex) {
             throw new ExitException(ex.getMessage());
         }
@@ -139,8 +139,8 @@ public class WaitingUnit implements UnitTypes {
 
     public String toString() {
         return String.format("serviceId:%s, serviceVariationId:%s, questionTypeId:%s, questionCategoryId:%s, " +
-                        "questionSubCategoryId:%s,responseType:%s,sdf:%s",
-                serviceId, serviceVariationId, questionTypeId, questionCategoryId, questionSubCategoryId, responseType, sdf);
+                        "questionSubCategoryId:%s,responseType:%s,sdf:%s, waitingTime %d",
+                serviceId, serviceVariationId, questionTypeId, questionCategoryId, questionSubCategoryId, responseType, sdf, waitingTime);
     }
 
 

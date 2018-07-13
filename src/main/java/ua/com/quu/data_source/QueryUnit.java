@@ -72,7 +72,7 @@ public class QueryUnit implements UnitTypes {
 
     private void datesDivide(String s) throws ExitException {
         try {
-            if (s.indexOf("-") == 1) {
+            if (s.indexOf("-") > 0) {
                 String[] line = s.split("-");
                 sdfFrom = new SimpleDateFormat("dd.MM.yyyy").parse(line[0]);
                 sdfTo = new SimpleDateFormat("dd.MM.yyyy").parse(line[1]);

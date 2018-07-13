@@ -4,7 +4,7 @@ import ua.com.quu.data_source.UnitTypes;
 
 import java.util.List;
 
-public interface UnitContainerImpl   {
+public interface UnitContainerImpl {
     boolean canProcess(String startWith);
 
     List<UnitTypes> getData();
